@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      width: 300px;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0f0f1a;
+      color: #e2e8f0;
+      padding: 16px;
+    }
+
+    header { margin-bottom: 14px; }
+    .title { font-size: 14px; font-weight: 700; color: #a78bfa; }
+    .subtitle { font-size: 10px; color: #64748b; margin-top: 1px; }
+
+    .card {
+      background: #1e1e30;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+    }
+    .card h3 {
+      font-size: 10px;
+      font-weight: 600;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 8px;
+    }
+
+    .field { margin-bottom: 10px; }
+    .field:last-child { margin-bottom: 0; }
+    .field label { display: block; font-size: 11px; color: #94a3b8; margin-bottom: 4px; }
+    textarea, input[type="text"], input[type="number"] {
+      width: 100%;
+      padding: 7px 9px;
+      background: #15151f;
+      border: 1px solid #2d2d44;
+      border-radius: 6px;
+      color: #e2e8f0;
+      font-size: 12px;
+      font-family: inherit;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 64px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+    input:focus, textarea:focus { outline: none; border-color: #7c3aed; }
+    .hint { font-size: 9px; color: #4b5563; margin-top: 3px; }
+
+    .inline { display: flex; gap: 10px; }
+    .inline .field { flex: 1; }
+
+    .status-empty { font-size: 12px; color: #64748b; }
+    .url-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 5px 0;
+      border-bottom: 1px solid #2a2a40;
+    }
+    .url-row:last-child { border-bottom: none; }
+    .dot {
+      width: 9px; height: 9px;
+      border-radius: 50%;
+      background: #374151;
+      flex-shrink: 0;
+    }
+    .dot.watching  { background: #fbbf24; animation: pulse 1.2s ease-in-out infinite; }
+    .dot.soldout   { background: #f87171; }
+    .dot.available { background: #4ade80; }
+    @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+    .url-info { min-width: 0; flex: 1; }
+    .url-name {
+      font-size: 11px;
+      color: #e2e8f0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .url-meta { font-size: 9px; color: #64748b; }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    button:disabled { opacity: 0.5; cursor: default; }
+    button:not(:disabled):hover { opacity: 0.85; }
+    .btn-start { background: #7c3aed; color: #fff; }
+    .btn-stop  { background: #1f2937; color: #9ca3af; border: 1px solid #374151; }
+    .btn-mute  { background: #991b1b; color: #fecaca; margin-top: 8px; display: none; }
+
+    .saved-flash { font-size: 10px; color: #4ade80; margin-left: 6px; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="title">Ticketmaster Watcher</div>
+    <div class="subtitle">Monitora várias páginas e avisa quando o ingresso libera</div>
+  </header>
+
+  <div class="card">
+    <h3>Configuração</h3>
+    <div class="field">
+      <label for="urls">URLs para monitorar (uma por linha)</label>
+      <textarea id="urls" placeholder="https://www.ticketmaster.com.br/event/...&#10;https://www.ticketmaster.com/event/..."></textarea>
+      <div class="hint">Cada URL abre numa aba em segundo plano e recarrega no intervalo definido.</div>
+    </div>
+    <div class="inline">
+      <div class="field">
+        <label for="keyword">Palavra de "esgotado"</label>
+        <input type="text" id="keyword" placeholder="esgotado">
+      </div>
+      <div class="field">
+        <label for="interval">Intervalo (s)</label>
+        <input type="number" id="interval" min="1" step="1" placeholder="5">
+      </div>
+    </div>
+    <button id="save-btn" class="btn-stop" style="margin-top:4px;">Salvar configuração<span id="saved-flash" class="saved-flash"></span></button>
+  </div>
+
+  <div class="card">
+    <h3>Status</h3>
+    <div id="status-list"><div class="status-empty">Inativo — configure as URLs e inicie.</div></div>
+  </div>
+
+  <button id="toggle-btn" class="btn-start">Iniciar monitoramento</button>
+  <button id="mute-btn" class="btn-mute">Parar alerta</button>
+
+  <script src="popup.js"></script>
+</body>
+</html>

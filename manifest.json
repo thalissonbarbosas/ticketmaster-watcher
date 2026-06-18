@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "name": "Ticketmaster Watcher",
+  "version": "1.1",
+  "description": "Watches one or more Ticketmaster event pages and alerts you the moment a sold-out keyword disappears.",
+  "permissions": [
+    "tabs",
+    "scripting",
+    "notifications",
+    "storage",
+    "alarms",
+    "offscreen"
+  ],
+  "host_permissions": [
+    "https://*.ticketmaster.com/*",
+    "https://*.ticketmaster.com.br/*",
+    "https://*.ticketmaster.co.uk/*",
+    "https://*.ticketmaster.ca/*",
+    "https://*.ticketmaster.com.mx/*",
+    "https://*.ticketmaster.com.au/*",
+    "https://*.ticketmaster.de/*",
+    "https://*.ticketmaster.es/*",
+    "https://*.ticketmaster.fr/*",
+    "https://*.ticketmaster.it/*",
+    "https://*.ticketmaster.ie/*",
+    "https://*.ticketmaster.nl/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Ticketmaster Watcher",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  }
+}
