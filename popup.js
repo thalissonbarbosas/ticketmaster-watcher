@@ -6,6 +6,8 @@ const els = {
   interval: $('interval'),
   saveBtn: $('save-btn'),
   savedFlash: $('saved-flash'),
+  addCurrentBtn: $('add-current-btn'),
+  addFlash: $('add-flash'),
   statusList: $('status-list'),
   toggleBtn: $('toggle-btn'),
   muteBtn: $('mute-btn'),
@@ -139,9 +141,36 @@ function setEditingEnabled(enabled) {
   els.keyword.disabled = !enabled;
   els.interval.disabled = !enabled;
   els.saveBtn.disabled = !enabled;
+  els.addCurrentBtn.disabled = !enabled;
 }
 
 // ---- events ------------------------------------------------------------
+
+function flash(el, text, ms = 1400) {
+  el.textContent = text;
+  setTimeout(() => (el.textContent = ''), ms);
+}
+
+els.addCurrentBtn.addEventListener('click', () => {
+  chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+    const url = tabs[0]?.url;
+    if (!url || !/^https?:\/\//.test(url)) {
+      flash(els.addFlash, 'URL inválida');
+      return;
+    }
+    const existing = parseUrls(els.urls.value);
+    if (existing.includes(url)) {
+      flash(els.addFlash, 'já está na lista');
+      return;
+    }
+    existing.push(url);
+    els.urls.value = existing.join('\n');
+    saveSettings().then(() => {
+      flash(els.addFlash, '✓ adicionada');
+      refreshStatus();
+    });
+  });
+});
 
 els.saveBtn.addEventListener('click', async () => {
   await saveSettings();
