@@ -26,12 +26,13 @@ Nothing is hardcoded — URLs, keyword, and interval all live in the popup setti
 
 ## Install (unpacked)
 
-1. Run `python3 generate_icons.py` once to create the icons (optional — icons are
-   committed).
-2. Open `chrome://extensions`, enable **Developer mode**.
-3. Click **Load unpacked** and select this folder.
-4. Open the popup, paste your event URLs (one per line), set the keyword and
+1. Open `chrome://extensions`, enable **Developer mode**.
+2. Click **Load unpacked** and select this folder.
+3. Open the popup, paste your event URLs (one per line), set the keyword and
    interval, **Salvar**, then **Iniciar monitoramento**.
+
+> The icons are already generated and committed — nothing to build. You only
+> need `generate_icons.py` if you want to change the icon design.
 
 > Keep the watched tabs/window open for the extension to keep checking.
 
@@ -43,7 +44,7 @@ Nothing is hardcoded — URLs, keyword, and interval all live in the popup setti
 | `background.js` | Service worker: per-URL reload→check loop, notifications |
 | `popup.html` / `popup.js` | Settings UI + per-URL status |
 | `offscreen.html` / `offscreen.js` | Plays the alert chime |
-| `generate_icons.py` | Generates the placeholder icons (pure stdlib) |
+| `generate_icons.py` | Regenerates the committed icons — optional (pure stdlib) |
 
 ## Notes
 
