@@ -1,5 +1,5 @@
 """
-Generate extension icons: Ticketmaster-blue background with a white lowercase "t".
+Generate extension icons: Ticketmaster-blue background with a white uppercase "T".
 No external dependencies — pure stdlib. Anti-aliased via 8x supersampling.
 Run once: python3 generate_icons.py
 """
@@ -10,11 +10,10 @@ FG = (255, 255, 255)    # white
 SS = 8                  # supersampling factor
 
 def glyph(fx, fy):
-    """Lowercase 't': short top stub, crossbar near the top, stem with a foot."""
-    stem = 0.42 <= fx <= 0.56 and 0.16 <= fy <= 0.78
-    crossbar = 0.28 <= fx <= 0.66 and 0.28 <= fy <= 0.38
-    foot = 0.56 <= fx <= 0.70 and 0.68 <= fy <= 0.78
-    return stem or crossbar or foot
+    """Uppercase 'T': top bar + centered vertical stem."""
+    top_bar = 0.20 <= fx <= 0.80 and 0.20 <= fy <= 0.32
+    stem = 0.43 <= fx <= 0.57 and 0.20 <= fy <= 0.80
+    return top_bar or stem
 
 def make_png(size, filename):
     rows = b''
