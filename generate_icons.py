@@ -1,18 +1,18 @@
 """
-Generate extension icons (purple square with a ticket-ish look).
+Generate extension icons (Ticketmaster-blue square with a ticket-ish look).
 No external dependencies — pure stdlib.
 Run once: python3 generate_icons.py
 """
 import struct, zlib, os
 
 def make_png(size, filename):
-    # Purple (#7c3aed) background with a lighter center band
+    # Ticketmaster blue (#026CDF) background with a lighter center band
     def pixel(x, y):
         # Horizontal stripe as a rough "ticket" motif
         band = size // 5
         if band < y < size - band:
-            return (124, 58, 237)   # main purple
-        return (109, 40, 217)       # slightly darker edge
+            return (2, 108, 223)    # main blue (#026CDF)
+        return (2, 80, 181)         # slightly darker edge (#0250B5)
 
     rows = b''
     for y in range(size):

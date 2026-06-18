@@ -5,20 +5,26 @@
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --tm-blue:        #026CDF;  /* Ticketmaster brand blue */
+      --tm-blue-bright: #3b9bff;
+      --tm-blue-dark:   #0250b5;
+    }
+
     body {
       width: 340px;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: #0f0f1a;
+      background: #0b1020;
       color: #e2e8f0;
       padding: 18px;
     }
 
     header { margin-bottom: 16px; }
-    .title { font-size: 16px; font-weight: 700; color: #a78bfa; }
+    .title { font-size: 16px; font-weight: 700; color: var(--tm-blue-bright); }
     .subtitle { font-size: 11px; color: #64748b; margin-top: 2px; }
 
     .card {
-      background: #1e1e30;
+      background: #141c2e;
       border-radius: 10px;
       padding: 14px 16px;
       margin-bottom: 14px;
@@ -38,8 +44,8 @@
     textarea, input[type="text"], input[type="number"] {
       width: 100%;
       padding: 8px 10px;
-      background: #15151f;
-      border: 1px solid #2d2d44;
+      background: #0e1626;
+      border: 1px solid #233047;
       border-radius: 6px;
       color: #e2e8f0;
       font-size: 13px;
@@ -52,7 +58,7 @@
       font-size: 12px;
       line-height: 1.45;
     }
-    input:focus, textarea:focus { outline: none; border-color: #7c3aed; }
+    input:focus, textarea:focus { outline: none; border-color: var(--tm-blue); }
     .hint { font-size: 10px; color: #4b5563; margin-top: 4px; }
 
     .inline { display: flex; gap: 11px; }
@@ -64,7 +70,7 @@
       align-items: center;
       gap: 9px;
       padding: 6px 0;
-      border-bottom: 1px solid #2a2a40;
+      border-bottom: 1px solid #233047;
     }
     .url-row:last-child { border-bottom: none; }
     .dot {
@@ -73,7 +79,7 @@
       background: #374151;
       flex-shrink: 0;
     }
-    .dot.watching  { background: #fbbf24; animation: pulse 1.2s ease-in-out infinite; }
+    .dot.watching  { background: var(--tm-blue-bright); animation: pulse 1.2s ease-in-out infinite; }
     .dot.soldout   { background: #f87171; }
     .dot.available { background: #4ade80; }
     @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
@@ -100,20 +106,20 @@
     }
     button:disabled { opacity: 0.5; cursor: default; }
     button:not(:disabled):hover { opacity: 0.85; }
-    .btn-start { background: #7c3aed; color: #fff; }
-    .btn-stop  { background: #1f2937; color: #9ca3af; border: 1px solid #374151; }
+    .btn-start { background: var(--tm-blue); color: #fff; }
+    .btn-stop  { background: #1a2435; color: #9fb3cc; border: 1px solid #2b3a52; }
     .btn-mute  { background: #991b1b; color: #fecaca; margin-top: 9px; display: none; }
     .btn-add {
-      background: #2a2440;
-      color: #c4b5fd;
-      border: 1px solid #3b3470;
+      background: #13233f;
+      color: #93c5fd;
+      border: 1px solid #1e3a5f;
       font-size: 12px;
       padding: 8px;
       margin-top: 7px;
     }
 
     .saved-flash { font-size: 11px; color: #4ade80; margin-left: 6px; }
-    .add-flash { font-size: 11px; color: #fbbf24; margin-left: 6px; }
+    .add-flash { font-size: 11px; color: var(--tm-blue-bright); margin-left: 6px; }
   </style>
 </head>
 <body>
